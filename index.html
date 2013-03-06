@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Roswell by shukydvir</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/shukydvir/roswell">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Roswell</h1>
+            <h2>A simple self-hosted password management server</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/shukydvir/roswell/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/shukydvir/roswell/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>Roswell</h1>
+
+<p>Roswell is a simple rails app that allows you to share passwords, notes, and software licenses with select groups of people.</p>
+
+<p><img src="https://github.com/downloads/blahed/roswell/screenshot.png" alt="Account Screenshot"></p>
+
+<h3>Features</h3>
+
+<ul>
+<li>Four types of: generic accounts, web accounts, licenses, and notes</li>
+<li>Unified search</li>
+<li>Simple user and group management</li>
+<li>Organize items by one or more groups</li>
+<li>Restrict users to only certain groups</li>
+<li>A favorites list for frequently used entries</li>
+<li>Single click copy-to-clipboard</li>
+</ul><h3>How secure is Roswell it?</h3>
+
+<p>Not extremely secure, but more secure than a shared google spreadsheet. Passwords are encrypted server-side before they are stored in mongo. The key to decrypt is stored on the server, so if your server is compromised, the passwords could be compromised. The <code>production</code> environment requires SSL, this is to ensure that cleartext passwords aren't sent/received over the wire.</p>
+
+<h3>How can it be more secure?</h3>
+
+<p>Client-side encryption seems to be a popular solution, but can be complex to implement and a little cumbersome to use. The hope was to figure out the UI and the workflow for creating/sharing/grouping/retrieving passwords, and then figure out how to make it more secure. Really, we just needed something better than a spreadsheet.</p>
+
+<h2>Installing Roswell</h2>
+
+<p>Roswell is just a rails app so clone it down somewhere and:</p>
+
+<pre><code>&gt; bundle              # install gem dependencies
+&gt; rake roswell:setup  # create your encryption key file and an admin user
+</code></pre>
+
+<p>Then just start your choice of server (you'll wanna put it behind SSL).</p>
+
+<h2>Create &amp; configure for Heroku</h2>
+
+<pre><code>&gt; gem install heroku
+&gt; heroku create example-roswell --stack cedar
+&gt; heroku addons:add mongolab:starter
+&gt; heroku config:add HEROKU=true
+&gt; heroku config:add ROSWELL_KEY=`ruby -r securerandom -e "puts SecureRandom.hex(64)"`
+&gt; git push heroku master
+&gt; heroku run rake roswell:create_admin_user
+</code></pre>
+
+<h2>Dependencies</h2>
+
+<ul>
+<li>Ruby 1.9</li>
+<li>MongoDB</li>
+</ul><h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/shukydvir">shukydvir</a> can be found on <a href="https://github.com/shukydvir/roswell">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
